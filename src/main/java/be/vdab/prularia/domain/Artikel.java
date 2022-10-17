@@ -1,20 +1,44 @@
 package be.vdab.prularia.domain;
 
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 public class Artikel {
+    @NotNull
+    @PositiveOrZero
     private final long artikelId;
+    @NotNull
+    @NotBlank
     private final String ean;
+    @NotNull
+    @NotBlank
     private final String naam;
+    @NotNull
+    @NotBlank
     private final String beschrijving;
+    @NotNull
+    @PositiveOrZero
+    @NumberFormat(pattern = "0.00")
     private final BigDecimal prijs;
+    @PositiveOrZero
     private final int gewichtInGram;
+    @PositiveOrZero
     private final int bestelpeil;
+    @PositiveOrZero
     private final int voorraad;
+    @PositiveOrZero
     private final int minimumVoorraad;
+    @PositiveOrZero
     private final int maximumVoorraad;
+    @PositiveOrZero
     private final int levertijd;
+    @PositiveOrZero
     private final int aantalBesteldLeverancier;
+    @PositiveOrZero
     private final int maxAantalInMagazijnPlaats;
 
     public Artikel(long artikelId, String ean, String naam, String beschrijving,
