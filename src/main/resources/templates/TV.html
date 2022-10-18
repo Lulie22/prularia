@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Bestellingen</title>
+    <Link rel="stylesheet" th:href="@{/css/prularia.css}">
 </head>
 <body>
+<div>
+    <img th:src="@{images/logo_prularia_zwart.png}" alt="prularia_logo">
+</div>
+
 <h1>Totaal Bestellingen <th:block th:text="${totaalBestelling}"></th:block></h1>
 <table>
     <thead>
@@ -20,7 +25,7 @@
     <tr th:each="bestelling : ${bestellingen}" th:object="${bestelling}">
         <td th:text="*{bestellingNummer}"></td>
         <td th:text="*{aantal}"></td>
-        <td th:text="*{totaalGewicht}"></td>
+        <td th:text="|*{totaalGewicht}gm|"></td>
 
     </tr>
     </tbody>
