@@ -26,12 +26,12 @@ public class ArtikelRepository {
                             result.getInt("levertijd"), result.getInt("aantalBesteldLeverancier"),
                             result.getInt("maxAantalInMagazijnPlaats"));
 
-    public Optional<Artikel> findById(long artikelId) {
+    public Optional<Artikel> vindById(long artikelId) {
         try {
             var sql = """
                     SELECT artikelId, ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad,
-                    minimunVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats
-                    FROM artikels
+                    minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats
+                    FROM artikelen
                     WHERE artikelId = ?
                     """;
             return Optional.of(template.queryForObject(sql, artikelRowMapper, artikelId));
