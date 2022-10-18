@@ -35,6 +35,7 @@ public class BestellingRepository {
                     annulatie, annulatiedatum, terugbetalingscode, bestellingsStatusId, actiecodeGebruikt,
                     bedrijfsnaam, btwNummer, voornaam, familienaam, facturatieAdresId, leveringsAdresId
                     FROM bestellingen
+                    WHERE bestellingsstatusId = 2
                     ORDER BY besteldatum
                     LIMIT 1
                     """;
@@ -50,6 +51,7 @@ public class BestellingRepository {
             var sql = """
                 SELECT bestelId 
                 FROM bestellingen
+                WHERE bestellingsStatusId = 2
                 ORDER BY besteldatum
                 LIMIT 1
                 """;
