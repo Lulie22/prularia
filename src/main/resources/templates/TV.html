@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestellingen</title>
+</head>
+<body>
+<h1>Totaal Bestellingen <th:block th:text="${totaalBestelling}"></th:block></h1>
+<table>
+    <thead>
+    <tr>
+        <th>Bestelling Nummer</th>
+        <th>Aantal</th>
+        <th>Totaal Gewicht</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="bestelling : ${bestellingen}" th:object="${bestelling}">
+        <td th:text="*{bestellingNummer}"></td>
+        <td th:text="*{aantal}"></td>
+        <td th:text="*{totaalGewicht}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
