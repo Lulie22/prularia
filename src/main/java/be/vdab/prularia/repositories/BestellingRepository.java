@@ -1,6 +1,6 @@
 package be.vdab.prularia.repositories;
 
-import be.vdab.prularia.DTO.TVOverZichtDTO;
+import be.vdab.prularia.dto.TVOverZichtDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

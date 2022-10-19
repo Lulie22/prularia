@@ -1,6 +1,6 @@
 package be.vdab.prularia.services;
 
-import be.vdab.prularia.DTO.TVOverZichtDTO;
+import be.vdab.prularia.dto.TVOverZichtDTO;
 import be.vdab.prularia.repositories.BestellingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

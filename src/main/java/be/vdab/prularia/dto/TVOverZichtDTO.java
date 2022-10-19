@@ -1,4 +1,4 @@
-package be.vdab.prularia.DTO;
+package be.vdab.prularia.dto;
 
 public class TVOverZichtDTO {
     private final long bestellingNummer;
