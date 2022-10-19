@@ -1,18 +1,18 @@
 package be.vdab.prularia.dto;
 
 public class TVOverZichtDTO {
-    private final long bestellingNummer;
+    private final long bestelId;
     private final int aantal;
     private final double totaalGewicht;
 
-    public TVOverZichtDTO(long bestellingNummer, int aantal, double totaalGewicht) {
-        this.bestellingNummer = bestellingNummer;
+    public TVOverZichtDTO(long bestelId, int aantal, double totaalGewicht) {
+        this.bestelId = bestelId;
         this.aantal = aantal;
         this.totaalGewicht = totaalGewicht;
     }
 
-    public long getBestellingNummer() {
-        return bestellingNummer;
+    public long getBestelId() {
+        return bestelId;
     }
 
     public int getAantal() {
