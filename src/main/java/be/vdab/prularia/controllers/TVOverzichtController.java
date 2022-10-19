@@ -1,6 +1,5 @@
 package be.vdab.prularia.controllers;
 
-import be.vdab.prularia.DTO.TVOverZichtDTO;
 import be.vdab.prularia.services.BestellingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
