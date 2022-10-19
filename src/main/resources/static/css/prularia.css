@@ -2,18 +2,15 @@ body{
 
 }
 div img{
-    height: 200px;
+    height: 300px;
     width: 100%;
     background-color: #ABD7A8;
-
-}
-img{
-
+    padding: 2px
 }
 h1{
     background-color: #ABD7A8;
     color: #FFFFFF;
-    font-size: 50px;
+    font-size: 75px;
     font-weight: bolder;
     text-align: center;
 }
@@ -23,16 +20,15 @@ table{
 }
 
 table, td, th {
-    border: 1px solid silver;
+    border: 5px solid black;
     border-collapse: collapse;
     padding: 5px 5px;
-
 }
 
 th {
     color: #FFFFFF;
     background-color: #ABD7A8;
-    font-size: 35px;
+    font-size: 50px;
     font-weight: bolder;
     text-align: center;
 }
@@ -42,16 +38,12 @@ td {
     padding-right: 0.2em;
     text-align: right;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 td a {
     color: black;
     text-decoration: none;
-}
-
-td a:hover {
-    color: #F7FFCC;
 }
 
 tr:nth-child(even) {
@@ -60,8 +52,4 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background-color: #FAFAFA;
-}
-
-tr:hover {
-    background-color: gold;
 }
