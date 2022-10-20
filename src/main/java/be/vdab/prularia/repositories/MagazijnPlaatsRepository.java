@@ -37,8 +37,6 @@ public class MagazijnPlaatsRepository {
         if (magazijnplaatsIdEnAantal.isEmpty()) {
             return List.of();
         }
-        System.out.println(magazijnplaatsIdEnAantal.keySet().size());
-        System.out.println(magazijnplaatsIdEnAantal.keySet());
         var sql = """
                 SELECT m.magazijnplaatsId, m.artikelId, a.naam, m.rij, m.rek
                 FROM magazijnplaatsen AS m
@@ -48,17 +46,10 @@ public class MagazijnPlaatsRepository {
                 """
                 + "?,".repeat(magazijnplaatsIdEnAantal.keySet().size() - 1 )
                 + "?) ORDER BY m.rij, m.rek";
-        /*var sql = """
-                SELECT m.magazijnplaatsId, m.artikelId, a.naam, m.rij, m.rek
-                FROM magazijnplaatsen AS m
-                LEFT JOIN artikelen AS a
-                ON m.artikelId = a.artikelId
-                WHERE magazijnplaatsId IN (353, 306, 309, 377, 299, 335)
-                ORDER BY m.rij, m.rek
-                """;*/
         return template.query(sql,
                 (result, rowNum) ->
                 new OverzichtBesteldArtikel(result.getLong("artikelId"), result.getString("naam"), result.getString("rij").charAt(0),
-                        result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false));
+                        result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false),
+                magazijnplaatsIdEnAantal.keySet().toArray());
     }
 }
