@@ -39,7 +39,7 @@ public class MagazijnPlaatsRepository {
         }
         System.out.println(magazijnplaatsIdEnAantal.keySet().size());
         System.out.println(magazijnplaatsIdEnAantal.keySet());
-        var sql = """
+        /*var sql = """
                 SELECT m.magazijnplaatsId, m.artikelId, a.naam, m.rij, m.rek
                 FROM magazijnplaatsen AS m
                 LEFT JOIN artikelen AS a
@@ -47,7 +47,14 @@ public class MagazijnPlaatsRepository {
                 WHERE magazijnplaatsId IN (
                 """
                 + "?,".repeat(magazijnplaatsIdEnAantal.keySet().size() - 1 )
-                + "?) ORDER BY m.rij, m.rek";
+                + "?) ORDER BY m.rij, m.rek";*/
+        var sql = """
+                SELECT m.magazijnplaatsId, m.artikelId, a.naam, m.rij, m.rek
+                FROM magazijnplaatsen AS m
+                LEFT JOIN artikelen AS a
+                ON m.artikelId = a.artikelId
+                WHERE magazijnplaatsId IN (353, 306, 309, 377, 299, 335)
+                """;
         return template.query(sql,
                 (result, rowNum) ->
                 new OverzichtBesteldArtikel(result.getLong("artikelId"), result.getString("naam"), result.getString("rij").charAt(0),
