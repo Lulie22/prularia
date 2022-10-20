@@ -44,7 +44,7 @@ public class BestellingService {
     public void vindVolgendeBestelling() {
         Optional<Long> optionalBestelId = bestellingRepository.vindIdVolgendeBestelling();
         if (optionalBestelId.isEmpty()) {
-
+            throw new GeenVolgendeBestellingException();
         } else {
             long bestelId = optionalBestelId.get();
             List<Bestellijn> bestellijnen = bestellijnRepository.vindBestellijnenByBestelId(bestelId);
