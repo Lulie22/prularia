@@ -1,0 +1,79 @@
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="refresh" content="30">
+    <title>Artikel</title>
+    <Link rel="stylesheet" th:href="@{/css/prularia.css}">
+</head>
+<body>
+<div>
+    <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
+</div>
+
+
+<div th:if="${artikel}" th:object="${artikel}">
+    <button> <a th:href="@{/bestelling/nieuw}">Terug naar bestelling</a></button>
+
+    <table class="artikelTable">
+        <caption>
+        <h1 th:text="|Artikel : *{naam}|"></h1>
+        </caption>
+
+        <tr>
+            <th>Artikel Id</th>
+            <td th:text="*{artikelId}"></td>
+        </tr>
+        <tr>
+            <th>EAN</th>
+            <td th:text="*{ean}"></td>
+        </tr>
+        <tr>
+            <th>Naam</th>
+            <td th:text="*{naam}"></td>
+        </tr>
+        <tr>
+            <th>Bescrijving</th>
+            <td th:text="*{beschrijving}"></td>
+        </tr>
+        <tr>
+            <th>Prijs</th>
+            <td th:text="*{prijs}"></td>
+        </tr>
+        <tr>
+            <th>Gewicht in Gram</th>
+            <td th:text="*{gewichtInGram}"></td>
+        </tr>
+        <tr>
+            <th>Bestel peil</th>
+            <td th:text="*{bestelpeil}"></td>
+        </tr>
+        <tr>
+            <th>Voorraad</th>
+            <td th:text="*{voorraad}"></td>
+        </tr>
+        <tr>
+            <th>Minimum voorraad</th>
+            <td th:text="*{minimumVoorraad}"></td>
+        </tr>
+        <tr>
+            <th>Maximum voorraad</th>
+            <td th:text="*{maximumVoorraad}"></td>
+        </tr>
+        <tr>
+            <th>Lever tijd</th>
+            <td th:text="*{levertijd}"></td>
+        </tr>
+        <tr>
+            <th>Aantal besteld leverancier</th>
+            <td th:text="*{aantalBesteldLeverancier}"></td>
+        </tr>
+        <tr>
+            <th>Max aantal in Magazijn plaats</th>
+            <td th:text="*{maxAantalInMagazijnPlaats}"></td>
+        </tr>
+    </table>
+<!--    <button> <a th:href="@{/bestellingen/nieuw}">Terug naar bestellingen</a></button>-->
+</div>
+
+
+</body>
+</html>

@@ -14,18 +14,18 @@ h1{
     font-weight: bolder;
     text-align: center;
 }
-table{
+.tv table{
     margin-left: auto;
     margin-right: auto;
 }
 
-table, td, th {
+.tv table, td, th {
     border: 5px solid black;
     border-collapse: collapse;
     padding: 5px 5px;
 }
 
-th {
+.tv th {
     color: #FFFFFF;
     background-color: #ABD7A8;
     font-size: 50px;
@@ -33,17 +33,12 @@ th {
     text-align: center;
 }
 
-td {
+.tv td {
     padding-left: 0.2em;
     padding-right: 0.2em;
     text-align: right;
     font-weight: bold;
     font-size: 30px;
-}
-
-td a {
-    color: black;
-    text-decoration: none;
 }
 
 tr:nth-child(even) {
@@ -52,4 +47,41 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background-color: #FAFAFA;
+}
+.artikelTable {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.artikelTable table,th,td{
+    border: 0.5px solid black;
+    border-collapse: collapse;
+
+
+
+}
+.artikelTable th {
+    padding: 5px;
+    text-align: left;
+    font-size: 20px;
+}
+.artikelTable td{
+
+    font-size: medium;
+    font-family: sans-serif;
+
+}
+button a{
+    padding: 10px;
+    text-decoration: none;
+    margin: 2em;
+    font-size: 20px;
+}
+div .artikel{
+    display: flex;
+}
+caption h1{
+    font-size: 30px;
+    text-align: left;
+    margin-bottom: 0;
 }

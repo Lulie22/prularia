@@ -7,10 +7,11 @@
 </head>
 <body>
 <div>
-    <img th:src="@{images/logo_prularia_zwart.png}" alt="prularia_logo">
+    <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
 
 <h1>Totaal Bestellingen <th:block th:text="${totaalBestelling}"></th:block></h1>
+<div class="tv">
 <table>
     <thead>
     <tr>
@@ -25,11 +26,11 @@
     <tr th:each="bestelling : ${bestellingen}" th:object="${bestelling}">
         <td th:text="*{bestelId}"></td>
         <td th:text="*{aantal}"></td>
-        <td th:text="|*{totaalGewicht}gm|"></td>
+        <td th:text="|*{totaalGewicht}g|"></td>
 
     </tr>
     </tbody>
 </table>
-
+</div>
 </body>
 </html>
