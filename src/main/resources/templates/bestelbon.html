@@ -22,7 +22,7 @@
     </thead>
     <tbody>
     <tr th:each="besteldArtikel : ${lijstVanBesteldeArtikels}" th:object="${besteldArtikel}">
-        <td th:text="*{naam}"></td>
+        <td><a th:text="*{naam}" th:href="@{/artikel/{artikelId}(artikelId=*{artikelId})}"></a></td>
         <td th:text="*{aantal}"></td>
         <td th:text="*{rij}"></td>
         <td th:text="*{rek}"></td>
