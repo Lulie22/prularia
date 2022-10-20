@@ -1,10 +1,12 @@
 package be.vdab.prularia.sessions;
 
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
 
+@Component
 @SessionScope
 public class MagazijnierSession {
     private long bestelId;
