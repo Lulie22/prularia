@@ -6,6 +6,29 @@
     <link rel="stylesheet" th:href="@{/css/prularia.css}">
 </head>
 <body>
-<h1>Bestelbon <th:block></th:block></h1>
+<div>
+    <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
+</div>
+<h1>BestelbonId: <th:block th:text="${bestelId}"></th:block></h1>
+<table>
+    <thead>
+    <tr>
+        <th>Artikel Naam</th>
+        <th>Aantal</th>
+        <th>Rij</th>
+        <th>Rek</th>
+        <th>Klaar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="besteldArtikel : ${lijstVanBesteldeArtikels}" th:object="${besteldArtikel}">
+        <td th:text="*{naam}"></td>
+        <td th:text="*{aantal}"></td>
+        <td th:text="*{rij}"></td>
+        <td th:text="*{rek}"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
