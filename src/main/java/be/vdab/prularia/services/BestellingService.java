@@ -4,6 +4,7 @@ import be.vdab.prularia.domain.Bestellijn;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
 import be.vdab.prularia.dto.TVOverZichtDTO;
+import be.vdab.prularia.exceptions.GeenVolgendeBestellingException;
 import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
 import be.vdab.prularia.repositories.BestellijnRepository;
 import be.vdab.prularia.repositories.BestellingRepository;
@@ -25,7 +26,8 @@ public class BestellingService {
 
     private final MagazijnierSession magazijnierSession;
 
-    public BestellingService(BestellingRepository bestellingRepository, BestellijnRepository bestellijnRepository, MagazijnPlaatsRepository magazijnPlaatsRepository, MagazijnierSession magazijnierSession) {
+    public BestellingService(BestellingRepository bestellingRepository, BestellijnRepository bestellijnRepository,
+                             MagazijnPlaatsRepository magazijnPlaatsRepository, MagazijnierSession magazijnierSession) {
         this.bestellingRepository = bestellingRepository;
         this.bestellijnRepository = bestellijnRepository;
         this.magazijnPlaatsRepository = magazijnPlaatsRepository;
@@ -48,8 +50,6 @@ public class BestellingService {
             List<Bestellijn> bestellijnen = bestellijnRepository.vindBestellijnenByBestelId(bestelId);
             HashMap<Long, Integer> magazijnplaatsIdEnAantal = new HashMap<>();
             for( Bestellijn bestellijn : bestellijnen) {
-                // zoek artikel via artikelId voor artikelnaam
-
                 // Zoek magazijnplaatsen via artikelId
                 List<MagazijnPlaats> magazijnplaatsen = magazijnPlaatsRepository
                         .vindMagazijnPlaatsenByArtikelId(bestellijn.getArtikelId());
@@ -60,11 +60,13 @@ public class BestellingService {
                 // Bereken voor elke artikelId de magazijnplaatsen en sla op in de hashmap
                 try {
                     while (aantalNodig > 0) {
+                        // voldoende stock in magazijnplaats
                         if (magazijnplaatsen.get(i).getAantal() >= aantalNodig) {
                             magazijnplaatsIdEnAantal.put(
                                     magazijnplaatsen.get(i).getMagazijnPlaatsId(),
                                     aantalNodig);
                             aantalNodig = 0;
+                        // onvoldoende stock in magazijnplaats
                         } else {
                             magazijnplaatsIdEnAantal.put(
                                     magazijnplaatsen.get(i).getMagazijnPlaatsId(),
@@ -83,6 +85,8 @@ public class BestellingService {
             // Maak een lijst van OverzichtBesteldArtikel door middel van de HashMap
             List<OverzichtBesteldArtikel> lijstVanEerstvolgendeBestelling =
                     magazijnPlaatsRepository.vindBesteldeArtikels(magazijnplaatsIdEnAantal);
+            // indien meerdere magazijniers: hier de database en stock al aanpassen.
+
             // Toevoegen van bestelId en lijstVanEerstVolgendeBestelling toevoegen aan de session
             magazijnierSession.setBestelId(bestelId);
             magazijnierSession.setLijstVanBesteldeArtikels(lijstVanEerstvolgendeBestelling);
