@@ -38,17 +38,18 @@ public class MagazijnPlaatsRepository {
             return List.of();
         }
         var sql = """
-                SELECT magazijnplaatsId, artikelId, naam, rij, rek
-                FROM magazijnplaatsen
-                LEFT JOIN artikelen
-                ON magazijnplaatsen.artikelId = artikelen.artikelId
+                SELECT m.magazijnplaatsId, m.artikelId, a.naam, m.rij, m.rek
+                FROM magazijnplaatsen AS m
+                LEFT JOIN artikelen AS a
+                ON m.artikelId = a.artikelId
                 WHERE magazijnplaatsId IN (
                 """
                 + "?,".repeat(magazijnplaatsIdEnAantal.keySet().size() - 1 )
-                + "?) ORDER BY rij, rek";
+                + "?) ORDER BY m.rij, m.rek";
         return template.query(sql,
                 (result, rowNum) ->
                 new OverzichtBesteldArtikel(result.getLong("artikelId"), result.getString("naam"), result.getString("rij").charAt(0),
-                        result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false));
+                        result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false),
+                magazijnplaatsIdEnAantal.keySet().toArray());
     }
 }

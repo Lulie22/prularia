@@ -18,7 +18,7 @@ public class BestellijnRepository {
     private final RowMapper<Bestellijn> bestellijnRowMapper =
             (result, rowNum) ->
                     new Bestellijn(result.getLong("bestellijnId"), result.getLong("bestelId"),
-                            result.getLong("artikelId"), result.getInt("aantalBestelId"),
+                            result.getLong("artikelId"), result.getInt("aantalBesteld"),
                             result.getInt("aantalGeannuleerd"));
 
     public List<Bestellijn> vindBestellijnenByBestelId(long bestelId) {
