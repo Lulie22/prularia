@@ -66,7 +66,8 @@ public class BestellingRepository {
 
     public List<TVOverZichtDTO> findEersteVijfBestellingen() {
         var sql = """
-                SELECT Bestellingen.bestelId, sum(Bestellijnen.aantalBesteld - Bestellijnen.aantalGeannuleerd) as totaalAantal, sum(Artikelen.gewichtInGram) as totaalGewicht
+                SELECT Bestellingen.bestelId, sum(Bestellijnen.aantalBesteld - Bestellijnen.aantalGeannuleerd) as totaalAantal,
+                 sum(Artikelen.gewichtInGram*(Bestellijnen.aantalBesteld - Bestellijnen.aantalGeannuleerd)) as totaalGewicht
                 FROM Bestellingen
                 left outer join Bestellijnen on Bestellijnen.bestelId = Bestellingen.bestelId
                 left outer join Artikelen on Bestellijnen.artikelId = Artikelen.artikelId
