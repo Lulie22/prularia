@@ -1,6 +1,6 @@
 package be.vdab.prularia.services;
 
-import be.vdab.prularia.domain.Bestellijn;
+import  be.vdab.prularia.domain.Bestellijn;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
 import be.vdab.prularia.dto.TVOverZichtDTO;

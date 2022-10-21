@@ -9,14 +9,12 @@
 <div>
     <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
-<h1>BestelbonId: <th:block th:text="${bestelId}"></th:block></h1>
-<div th:if="${geenVolgendeBestelling}" class="fout">Geen volgende bestelling gevonden</div>
-<div th:if="${onvoldoendeArtikelen}" class="fout">Onvoldoende Artikelen in het magazijn voor deze bestelling:
-    <th:block th:text="|BestelId: ${onvoldoendeArtikelenBestelId}|"></th:block>
-    <th:block th:text="|BestellijnId: ${onvoldoendeArtikelenBestellijnId}|"></th:block>
-    <th:block th:text="|ArtikelId: ${onvoldoendeArtikelenArtikelId}|"></th:block>
-</div>
-<table>
+
+<a th:href="@{/}"><button>Home</button></a>
+<table class="format">
+    <caption>
+        <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
+    </caption>
     <thead>
     <tr>
         <th>Artikel Naam</th>
