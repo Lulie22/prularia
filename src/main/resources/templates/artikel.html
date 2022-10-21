@@ -11,9 +11,9 @@
 
 
 <div th:if="${artikel}" th:object="${artikel}">
-    <button> <a th:href="@{/bestelling/nieuw}">Terug naar bestelling</a></button>
+    <a th:href="@{/bestelling/nieuw}"><button>Terug naar bestelling</button></a>
 
-    <table class="artikelTable">
+    <table class="format">
         <caption>
         <h1 th:text="|Artikel : *{naam}|"></h1>
         </caption>
@@ -39,7 +39,7 @@
             <td th:text="*{prijs}"></td>
         </tr>
         <tr>
-            <th>Gewicht in Gram</th>
+            <th>Gewicht in gram</th>
             <td th:text="*{gewichtInGram}"></td>
         </tr>
         <tr>
@@ -67,11 +67,11 @@
             <td th:text="*{aantalBesteldLeverancier}"></td>
         </tr>
         <tr>
-            <th>Max aantal in Magazijn plaats</th>
+            <th>Max aantal in magazijn plaats</th>
             <td th:text="*{maxAantalInMagazijnPlaats}"></td>
         </tr>
     </table>
-<!--    <button> <a th:href="@{/bestellingen/nieuw}">Terug naar bestellingen</a></button>-->
+
 </div>
 
 
