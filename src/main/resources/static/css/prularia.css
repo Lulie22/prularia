@@ -85,3 +85,10 @@ caption h1{
     text-align: left;
     margin-bottom: 0;
 }
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
