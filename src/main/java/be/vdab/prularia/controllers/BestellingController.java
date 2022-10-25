@@ -6,6 +6,7 @@ import be.vdab.prularia.services.BestellingService;
 import be.vdab.prularia.sessions.MagazijnierSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,5 +44,15 @@ public class BestellingController {
         return new ModelAndView("bestelbon")
                 .addObject("bestelId", magazijnierSession.getBestelId())
                 .addObject("lijstVanBesteldeArtikels", magazijnierSession.getLijstVanBesteldeArtikels());
+    }
+
+    @PostMapping("afgewerktebestelling")
+    public ModelAndView afgewerkteBestelling(){
+        var model = new ModelAndView("index");
+        // service aanspreken, etc
+        // volgende user story
+
+        // bestelling succesvol afgewerkt
+        return model.addObject("bestellingIsAfgewerkt", true);
     }
 }

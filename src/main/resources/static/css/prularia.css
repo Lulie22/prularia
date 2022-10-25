@@ -1,20 +1,23 @@
-body{
+body {
 
 }
-div img{
+
+div img {
     height: 300px;
     width: 100%;
     background-color: #ABD7A8;
     padding: 2px
 }
-h1{
+
+h1 {
     background-color: #ABD7A8;
     color: #FFFFFF;
     font-size: 75px;
     font-weight: bolder;
     text-align: center;
 }
-.tv table{
+
+.tv table {
     margin-left: auto;
     margin-right: auto;
 }
@@ -48,21 +51,25 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #FAFAFA;
 }
+
 .format {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
-.format table,th,td{
+
+.format table, th, td {
     border: 0.5px solid black;
     border-collapse: collapse;
 }
+
 .format th {
     padding: 5px;
     text-align: left;
     font-size: 20px;
 }
-.format td{
+
+.format td {
 
     font-size: medium;
     font-family: sans-serif;
@@ -74,21 +81,32 @@ button {
     margin: 1em;
     font-size: 20px;
 }
-a{
+
+a {
     text-decoration: none;
 }
-div .artikel{
+
+div .artikel {
     display: flex;
 }
-caption h1{
+
+caption h1 {
     font-size: 30px;
     text-align: left;
     margin-bottom: 0;
 }
+
 .fout {
     background-color: red;
-    color:white;
+    color: white;
     font-weight: bold;
     padding-left: 0.5em;
     padding-right: 0.5em;
+}
+
+.boodschap {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 0.5em;
 }
