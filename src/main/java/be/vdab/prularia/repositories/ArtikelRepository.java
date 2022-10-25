@@ -39,4 +39,18 @@ public class ArtikelRepository {
             return Optional.empty();
         }
     }
+
+    public Optional<Artikel> vindByEAN(String ean) {
+        try {
+            var sql = """
+                    SELECT artikelId, ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad,
+                    minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats
+                    FROM artikelen
+                    WHERE ean = ?
+                    """;
+            return Optional.of(template.queryForObject(sql, artikelRowMapper, ean));
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            return Optional.empty();
+        }
+    }
 }
