@@ -5,9 +5,7 @@ import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
 import be.vdab.prularia.services.BestellingService;
 import be.vdab.prularia.sessions.MagazijnierSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -44,6 +42,26 @@ public class BestellingController {
         return new ModelAndView("bestelbon")
                 .addObject("bestelId", magazijnierSession.getBestelId())
                 .addObject("lijstVanBesteldeArtikels", magazijnierSession.getLijstVanBesteldeArtikels());
+    }
+
+    /*@PostMapping("checkbox")
+    public void checkedBox(@RequestParam(name = "magazijnplaatsId", defaultValue = "") String stringMagazijnplaatsId,
+                           @RequestParam(name = "status", defaultValue = "") String stringStatus) {
+        System.out.println("StringmagazijnplaatsId:" + stringMagazijnplaatsId);
+        System.out.println("Stringstatus:" + stringStatus);
+    }*/
+    // Path variables zijn niet mogelijk voor PostMapping
+    /*@PostMapping("checkbox/{magazijnplaatsId}/{status}")
+    public void checkbox(@PathVariable long magazijnplaatsId, @PathVariable boolean status) {
+        System.out.println("magazijnplaatsId:" + magazijnplaatsId);
+        System.out.println("status:" + status);
+    }*/
+    @PostMapping("checkbox")
+    @ResponseBody
+    public String checkbox(@RequestParam int magazijnplaatsid, @RequestParam String status) {
+        System.out.println("StringmagazijnplaatsId:" + magazijnplaatsid);
+        System.out.println("Stringstatus:" + status);
+        return "magazijnplaatsId: " + magazijnplaatsid;
     }
 
     @PostMapping("afgewerktebestelling")

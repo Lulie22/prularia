@@ -48,8 +48,10 @@ public class MagazijnPlaatsRepository {
                 + "?) ORDER BY m.rij, m.rek";
         return template.query(sql,
                 (result, rowNum) ->
-                new OverzichtBesteldArtikel(result.getLong("artikelId"), result.getString("naam"), result.getString("rij").charAt(0),
-                        result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false),
+                new OverzichtBesteldArtikel(result.getLong("artikelId"), result.getString("naam"),
+                        result.getString("rij").charAt(0), result.getInt("rek"),
+                        magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false,
+                        result.getLong("magazijnplaatsId")),
                 magazijnplaatsIdEnAantal.keySet().toArray());
     }
 }

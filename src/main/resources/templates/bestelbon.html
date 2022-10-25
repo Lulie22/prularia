@@ -11,31 +11,33 @@
     <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
 
-<a th:href="@{/}"><button>Home</button></a>
+<a th:href="@{/}">
+    <button>Home</button>
+</a>
+<table class="format">
+    <caption>
+        <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
+    </caption>
+    <thead>
+    <tr>
+        <th>Artikel Naam</th>
+        <th>Aantal</th>
+        <th>Rij</th>
+        <th>Rek</th>
+        <th>Klaar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="besteldArtikel : ${lijstVanBesteldeArtikels}" th:object="${besteldArtikel}">
+        <td><a th:text="*{naam}" th:href="@{/artikel/{artikelId}(artikelId=*{artikelId})}"></a></td>
+        <td th:text="*{aantal}"></td>
+        <td th:text="*{rij}"></td>
+        <td th:text="*{rek}"></td>
+        <td><label><input type="checkbox" th:attr="data-magazijnplaatsid=*{magazijnplaatsId}"></label></td>
+    </tr>
+    </tbody>
+</table>
 <form method="post" th:action="@{/bestelling/afgewerktebestelling}">
-    <table class="format">
-        <caption>
-            <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
-        </caption>
-        <thead>
-        <tr>
-            <th>Artikel Naam</th>
-            <th>Aantal</th>
-            <th>Rij</th>
-            <th>Rek</th>
-            <th>Klaar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="besteldArtikel : ${lijstVanBesteldeArtikels}" th:object="${besteldArtikel}">
-            <td><a th:text="*{naam}" th:href="@{/artikel/{artikelId}(artikelId=*{artikelId})}"></a></td>
-            <td th:text="*{aantal}"></td>
-            <td th:text="*{rij}"></td>
-            <td th:text="*{rek}"></td>
-            <td><label><input type="checkbox"></label></td>
-        </tr>
-        </tbody>
-    </table>
     <button type="submit" id="afgewerktKnop" disabled>Afwerken</button>
 </form>
 
