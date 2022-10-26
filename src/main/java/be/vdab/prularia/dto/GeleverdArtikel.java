@@ -1,10 +1,25 @@
 package be.vdab.prularia.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
 public class GeleverdArtikel {
+    @NotNull
+    @PositiveOrZero
     private long artikelId;
+    @NotNull
+    @NotBlank
     private final String ean;
+    @NotNull
+    @Positive
     private final int aantal;
+    @NotNull
+    @PositiveOrZero
     private final long aantalGoedgekeurd;
+    @NotNull
+    @PositiveOrZero
     private final int aantalTeruggestuurd;
 
     public GeleverdArtikel(long artikelId, String ean, int aantal, long aantalGoedgekeurd, int aantalTeruggestuurd) {
