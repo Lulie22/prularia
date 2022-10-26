@@ -1,5 +1,6 @@
 package be.vdab.prularia.repositories;
 
+import be.vdab.prularia.dto.OverzichtBesteldArtikel;
 import be.vdab.prularia.dto.TVOverZichtDTO;
 import be.vdab.prularia.domain.Artikel;
 import be.vdab.prularia.domain.Bestelling;
@@ -72,8 +73,8 @@ public class BestellingRepository {
                 left outer join Bestellijnen on Bestellijnen.bestelId = Bestellingen.bestelId
                 left outer join Artikelen on Bestellijnen.artikelId = Artikelen.artikelId
                 where Bestellingen.bestellingsStatusId = 2 
-                group by Bestellingen.bestelId
-                ORDER BY besteldatum Limit 5;
+                group by Bestellingen.bestelId,Bestellingen.besteldatum
+                ORDER BY Bestellingen.besteldatum Limit 5;
                 """;
         RowMapper<TVOverZichtDTO> mapper = (result, rowNum) ->
                 new TVOverZichtDTO(result.getLong("bestelId"), result.getInt("totaalAantal"),
@@ -88,5 +89,21 @@ public class BestellingRepository {
                     """;
 
             return template.queryForObject(sql, Integer.class);
+        }
+
+        public Optional<Bestelling> vindBestellingById(long bestelId){
+            try {
+                var sql = """
+                    SELECT bestelId, besteldatum, klantId, betaald, betalingscode, betaalwijzeId,
+                    annulatie, annulatiedatum, terugbetalingscode, bestellingsStatusId, actiecodeGebruikt,
+                    bedrijfsnaam, btwNummer, voornaam, familienaam, facturatieAdresId, leveringsAdresId
+                    FROM bestellingen
+                    WHERE bestelId = ?
+                    """;
+                return Optional.of(template.queryForObject(sql, bestellingRowMapper,bestelId));
+            } catch (
+                    IncorrectResultSizeDataAccessException ex) {
+                return Optional.empty();
+            }
         }
     }

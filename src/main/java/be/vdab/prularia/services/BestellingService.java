@@ -92,4 +92,9 @@ public class BestellingService {
             magazijnierSession.setLijstVanBesteldeArtikels(lijstVanEerstvolgendeBestelling);
         }
     }
+    @Transactional
+    public void afgewerkteBestelling(long bestelId, OverzichtBesteldArtikel overzichtBesteldArtikel){
+        var besteldId = bestellingRepository.vindBestellingById(bestelId);
+
+    }
 }

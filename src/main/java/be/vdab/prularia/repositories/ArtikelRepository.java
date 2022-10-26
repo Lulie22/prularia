@@ -1,6 +1,8 @@
 package be.vdab.prularia.repositories;
 
 import be.vdab.prularia.domain.Artikel;
+import be.vdab.prularia.exceptions.ArtikelNietGevondenException;
+import be.vdab.prularia.exceptions.OnvoldoendeArtikelVoorraadException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -38,5 +40,20 @@ public class ArtikelRepository {
         } catch (IncorrectResultSizeDataAccessException ex) {
             return Optional.empty();
         }
+    }
+    public int verlaagArtikelVoorraad(long artikelId, int aantal){
+        var sql = """
+                  update artikelen
+                  set voorraad = voorraad - ?
+                  where artikelId = ? and voorraad >= ?
+                  """;
+        return template.update(sql,aantal,artikelId,aantal);
+//        if(aantalAangepasteRecord == 0){
+//            if (vindById(artikelId).isEmpty()){
+//                throw new ArtikelNietGevondenException();
+//            }else{
+//                throw new OnvoldoendeArtikelVoorraadException();
+//            }
+//        }
     }
 }

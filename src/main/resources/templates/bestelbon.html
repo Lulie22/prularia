@@ -10,7 +10,9 @@
     <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
 
-<a th:href="@{/}"><button>Home</button></a>
+<a th:href="@{/}">
+    <button>Home</button>
+</a>
 <table class="format">
     <caption>
         <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
@@ -21,7 +23,7 @@
         <th>Aantal</th>
         <th>Rij</th>
         <th>Rek</th>
-        <!--<th>Klaar</th>-->
+<!--        <th>Klaar</th>-->
     </tr>
     </thead>
     <tbody>
@@ -30,7 +32,7 @@
         <td th:text="*{aantal}"></td>
         <td th:text="*{rij}"></td>
         <td th:text="*{rek}"></td>
-        <!--<td><input type="checkbox"></td>-->
+<!--        <td><input type="checkbox"></td>-->
     </tr>
     </tbody>
 </table>
