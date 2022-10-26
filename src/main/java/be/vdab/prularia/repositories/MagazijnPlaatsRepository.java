@@ -3,6 +3,10 @@ package be.vdab.prularia.repositories;
 import be.vdab.prularia.domain.Bestelling;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
+import be.vdab.prularia.exceptions.ArtikelNietGevondenException;
+import be.vdab.prularia.exceptions.MagazijnPlaatsNietGevondenException;
+import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
+import be.vdab.prularia.exceptions.OnvoldoendeArtikelVoorraadException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -52,4 +56,22 @@ public class MagazijnPlaatsRepository {
                         result.getInt("rek"), magazijnplaatsIdEnAantal.get(result.getLong("magazijnplaatsId")), false),
                 magazijnplaatsIdEnAantal.keySet().toArray());
     }
+
+    public int verlaagAantalArtikelInMagazijn(long artikelId, int aantalVerkocht){
+        var magazijnPlaatsId = vindMagazijnPlaatsenByArtikelId(artikelId);
+        var sql = """
+                  update magazijnPlaatsen
+                  set aantal = aantal - ?
+                  where magazijnPlaatsId = ? and aantal >= ?
+                  """;
+        return   template.update(sql,aantalVerkocht,magazijnPlaatsId,aantalVerkocht);
+//        if(aantalAangepasteRecord == 0){
+//            if (magazijnPlaatsId.isEmpty()){
+//                throw new MagazijnPlaatsNietGevondenException();
+//            }else{
+//                throw new OnvoldoendeArtikelInHetMagazijnException();
+//            }
+//        }
+    }
+
 }
