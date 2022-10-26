@@ -19,7 +19,7 @@ for (const checkbox of checkboxes) {
             status: this.checked
         }
         const response = await fetch("checkbox",
-            {method: "POST", body:JSON.stringify(data), mode:"no-cors", headers: { "Content-Type": "application/json" },})
+            {method: "POST", body:JSON.stringify(data), mode:"no-cors", headers: { "Content-Type": "text/plain" }})
         // via path variable (niet mogelijk gezien deze altijd wordt doorgestuurd als GET en niet als POST
         /*console.log(checkbox.dataset.magazijnplaatsid)
         console.log(checkbox.checked)

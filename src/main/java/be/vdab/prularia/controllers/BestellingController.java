@@ -1,9 +1,11 @@
 package be.vdab.prularia.controllers;
 
+import be.vdab.prularia.dto.MagazijnplaatsIdEnStatus;
 import be.vdab.prularia.exceptions.GeenVolgendeBestellingException;
 import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
 import be.vdab.prularia.services.BestellingService;
 import be.vdab.prularia.sessions.MagazijnierSession;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,12 +58,20 @@ public class BestellingController {
         System.out.println("magazijnplaatsId:" + magazijnplaatsId);
         System.out.println("status:" + status);
     }*/
-    @PostMapping("checkbox")
+    // request parameters bij body zetten
+    /*@PostMapping("checkbox")
     @ResponseBody
     public String checkbox(@RequestParam int magazijnplaatsid, @RequestParam String status) {
         System.out.println("StringmagazijnplaatsId:" + magazijnplaatsid);
         System.out.println("Stringstatus:" + status);
         return "magazijnplaatsId: " + magazijnplaatsid;
+    }*/
+
+    // gebruik van een form voor elke checkbox in combinatie met Path Variables
+    @PostMapping(value = "checkbox", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String checkbox(@RequestBody MagazijnplaatsIdEnStatus magazijnplaatsIdEnStatus) {
+        System.out.println(magazijnplaatsIdEnStatus);
+        return "";
     }
 
     @PostMapping("afgewerktebestelling")
