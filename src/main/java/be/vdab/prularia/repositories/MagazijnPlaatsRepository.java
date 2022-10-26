@@ -1,12 +1,8 @@
 package be.vdab.prularia.repositories;
 
-import be.vdab.prularia.domain.Bestelling;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
-import be.vdab.prularia.exceptions.ArtikelNietGevondenException;
-import be.vdab.prularia.exceptions.MagazijnPlaatsNietGevondenException;
-import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
-import be.vdab.prularia.exceptions.OnvoldoendeArtikelVoorraadException;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

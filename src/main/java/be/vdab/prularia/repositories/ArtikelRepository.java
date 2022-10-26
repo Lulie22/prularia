@@ -1,8 +1,6 @@
 package be.vdab.prularia.repositories;
 
 import be.vdab.prularia.domain.Artikel;
-import be.vdab.prularia.exceptions.ArtikelNietGevondenException;
-import be.vdab.prularia.exceptions.OnvoldoendeArtikelVoorraadException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

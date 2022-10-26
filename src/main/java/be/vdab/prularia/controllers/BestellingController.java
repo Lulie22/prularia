@@ -44,4 +44,5 @@ public class BestellingController {
                 .addObject("bestelId", magazijnierSession.getBestelId())
                 .addObject("lijstVanBesteldeArtikels", magazijnierSession.getLijstVanBesteldeArtikels());
     }
+
 }
