@@ -15,7 +15,7 @@
     <button>Home</button>
 </a>
 <th:block th:if="${param.nogNietAlleArtikelsOpgehaald}" th:class="fout">Kan bestelbon niet verwerken. Niet alle artikels zijn opgehaald</th:block>
-<th:block th:if="${!param.BesteldArtikelNietGevondenOpMagazijnPlaats.isEmpty()}" th:text="|Kan magazijnplaatsId van het besteld artikel niet vinden. MagazijnplaatsId: ${param.BesteldArtikelNietGevondenOpMagazijnPlaats}|" th:class="fout"></th:block>
+<th:block th:if="${param.BesteldArtikelNietGevondenOpMagazijnPlaats}" th:text="|Kan magazijnplaatsId van het besteld artikel niet vinden. MagazijnplaatsId: ${param.BesteldArtikelNietGevondenOpMagazijnPlaats}|" th:class="fout"></th:block>
 <table class="format">
     <caption>
         <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
@@ -35,7 +35,7 @@
         <td th:text="*{aantal}"></td>
         <td th:text="*{rij}"></td>
         <td th:text="*{rek}"></td>
-        <td><label><input type="checkbox" th:attr="data-magazijnplaatsid=*{magazijnplaatsId}"></label></td>
+        <td><label><input type="checkbox" th:attr="data-magazijnplaatsid=*{magazijnplaatsId}" th:checked="*{aangevinkt}"></label></td>
     </tr>
     </tbody>
 </table>

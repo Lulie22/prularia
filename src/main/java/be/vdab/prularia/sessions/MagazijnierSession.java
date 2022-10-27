@@ -32,7 +32,8 @@ public class MagazijnierSession {
     public boolean setStatusBesteldArtikel(long magazijnplaatsId, boolean status) {
         boolean aangepast = false;
         for (var bestellijn : lijstVanBesteldeArtikels) {
-            if (bestellijn.magazijnplaatsId() == magazijnplaatsId) {
+            if (bestellijn.getMagazijnplaatsId() == magazijnplaatsId) {
+                bestellijn.setAangevinkt(status);
                 aangepast = true;
                 break;
             }
@@ -42,6 +43,6 @@ public class MagazijnierSession {
 
     public boolean besteldeArtikelsZijnOpgehaald() {
         return lijstVanBesteldeArtikels.stream()
-                .allMatch(OverzichtBesteldArtikel::aangevinkt);
+                .allMatch(OverzichtBesteldArtikel::isAangevinkt);
     }
 }
