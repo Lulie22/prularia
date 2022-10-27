@@ -1,13 +1,12 @@
 package be.vdab.prularia.services;
 
+import be.vdab.prularia.domain.Artikel;
 import be.vdab.prularia.domain.Bestellijn;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.domain.UitgaandeLevering;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
 import be.vdab.prularia.dto.TVOverZichtDTO;
-import be.vdab.prularia.exceptions.GeenVolgendeBestellingException;
-import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
-import be.vdab.prularia.exceptions.UitgaandaLeveringsStatusNietGevondenException;
+import be.vdab.prularia.exceptions.*;
 import be.vdab.prularia.repositories.*;
 import be.vdab.prularia.sessions.MagazijnierSession;
 import org.springframework.stereotype.Service;
@@ -89,7 +88,8 @@ public class BestellingService {
                     throw new OnvoldoendeArtikelInHetMagazijnException(
                             bestelId,
                             bestellijn.getBestellijnId(),
-                            bestellijn.getArtikelId());
+                            bestellijn.getArtikelId(),
+                            magazijnplaatsen.get(i).getMagazijnPlaatsId());
                 }
             }
             // Maak een lijst van OverzichtBesteldArtikel door middel van de HashMap
@@ -104,7 +104,7 @@ public class BestellingService {
     }
 
     @Transactional
-    public void afgewerkteBestelling() {
+    public long afgewerkteBestelling() {
         var bestelId = magazijnierSession.getBestelId();
         var besteldArtikelLijst = magazijnierSession.getLijstVanBesteldeArtikels();
 
@@ -113,15 +113,42 @@ public class BestellingService {
                     throw new GeenVolgendeBestellingException();
                 }
         );
-        var uitgaandeLeveringStatusId = uitgaandaLeveringsStatusRepository.vindUitgaandeLeveringStatusId().orElseThrow(()->{
-            throw new UitgaandaLeveringsStatusNietGevondenException();});
+        var uitgaandeLeveringStatusId = uitgaandaLeveringsStatusRepository.vindUitgaandeLeveringStatusId().orElseThrow(() ->
+        {
+            throw new UitgaandaLeveringsStatusIdNietGevondenException();
+        });
         besteldArtikelLijst.stream().forEach(bestellijn -> {
-            magazijnPlaatsRepository.verlaagAantalArtikelInMagazijn(bestellijn.artikelId(), bestellijn.aantal());
-            artikelRepository.verlaagArtikelVoorraad(bestellijn.artikelId(), bestellijn.aantal());
+            var aantalAangepasteMagazijnPlaatRecord = magazijnPlaatsRepository.verlaagAantalArtikelInMagazijn(bestellijn.magazijnPlaatsId(), bestellijn.aantal());
+            if (aantalAangepasteMagazijnPlaatRecord == 0) {
+                if (magazijnPlaatsRepository.vindMagazijnPlaatsenByArtikelId(bestellijn.artikelId()).isEmpty()) {
+                    throw new MagazijnPlaatNietGevondenException(bestellijn.magazijnPlaatsId());
+                }
+//                else {
+//                    throw new OnvoldoendeArtikelInHetMagazijnException(
+//                            bestelId,
+//                            bestellijnRepository.vindBestellijnByArtikelId(bestellijn.artikelId()).getBestellijnId(),
+//                            bestellijn.artikelId()
+//                    );
+//                }
+            }
+            var aantalAangepasteArtikelRecord = artikelRepository.verlaagArtikelVoorraad(bestellijn.artikelId(), bestellijn.aantal());
+            if (aantalAangepasteArtikelRecord == 0) {
+
+                if (artikelRepository.vindById(bestellijn.artikelId()).isEmpty()) {
+                    throw new ArtikelNietGevondenException(bestellijn.artikelId());
+                } else {
+                    throw new OnvoldoendeArtikelVoorraadException(
+                            bestelId,
+                            bestellijnRepository.vindBestellijnByArtikelId(bestellijn.artikelId()).getBestellijnId(),
+                            bestellijn.artikelId()
+                    );
+                }
+            }
         });
 
-        uitgaandeLeveringRepository.create(new UitgaandeLevering(
+        return uitgaandeLeveringRepository.create(new UitgaandeLevering(
                 0, bestelId, LocalDate.now(), LocalDate.now().plusDays(1), "",
                 besteling.getKlantId(), uitgaandeLeveringStatusId));
+
     }
 }
