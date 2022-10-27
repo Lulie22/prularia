@@ -29,4 +29,12 @@ public class BestellijnRepository {
                 """;
         return template.query(sql, bestellijnRowMapper, bestelId);
     }
+    public Bestellijn vindBestellijnByArtikelId(long artikelId){
+        var sql = """
+                SELECT bestellijnId, bestelId, artikelId, aantalBesteld, aantalGeannuleerd
+                FROM bestellijnen
+                WHERE artikelId = ?
+                """;
+        return template.queryForObject(sql,bestellijnRowMapper,artikelId);
+    }
 }

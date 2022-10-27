@@ -53,21 +53,14 @@ public class MagazijnPlaatsRepository {
                 magazijnplaatsIdEnAantal.keySet().toArray());
     }
 
-    public int verlaagAantalArtikelInMagazijn(long artikelId, int aantalVerkocht){
-        var magazijnPlaatsId = vindMagazijnPlaatsenByArtikelId(artikelId);
+    public int verlaagAantalArtikelInMagazijn(long magazijnPlaatsId, int aantalVerkocht){
+        //var magazijnPlaatsId = vindMagazijnPlaatsenByArtikelId(artikelId);
         var sql = """
                   update magazijnPlaatsen
                   set aantal = aantal - ?
-                  where magazijnPlaatsId = ? and aantal >= ?
+                  where magazijnPlaatsId = ?
                   """;
-        return   template.update(sql,aantalVerkocht,magazijnPlaatsId,aantalVerkocht);
-//        if(aantalAangepasteRecord == 0){
-//            if (magazijnPlaatsId.isEmpty()){
-//                throw new MagazijnPlaatsNietGevondenException();
-//            }else{
-//                throw new OnvoldoendeArtikelInHetMagazijnException();
-//            }
-//        }
+        return   template.update(sql,aantalVerkocht,magazijnPlaatsId);
     }
 
 }

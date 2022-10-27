@@ -46,12 +46,6 @@ public class ArtikelRepository {
                   where artikelId = ? and voorraad >= ?
                   """;
         return template.update(sql,aantal,artikelId,aantal);
-//        if(aantalAangepasteRecord == 0){
-//            if (vindById(artikelId).isEmpty()){
-//                throw new ArtikelNietGevondenException();
-//            }else{
-//                throw new OnvoldoendeArtikelVoorraadException();
-//            }
-//        }
+
     }
 }
