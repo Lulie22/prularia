@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class BestellingRepository {
                     new Bestelling(result.getLong("bestelId"), result.getTimestamp("besteldatum").toLocalDateTime(),
                             result.getLong("klantId"), result.getBoolean("betaald"),
                             result.getString("betalingscode"), result.getLong("betaalwijzeId"),
-                            result.getBoolean("annulatie"), result.getDate("annulatiedatum").toLocalDate(),
+                            result.getBoolean("annulatie"), result.getObject("annulatiedatum", LocalDate.class),
                             result.getString("terugbetalingscode"), result.getLong("bestellingsStatusId"),
                             result.getBoolean("actiecodeGebruikt"), result.getString("bedrijfsnaam"),
                             result.getString("btwNummer"), result.getString("voornaam"), result.getString("familienaam"),
