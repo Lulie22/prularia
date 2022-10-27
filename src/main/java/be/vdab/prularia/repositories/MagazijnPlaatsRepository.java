@@ -1,8 +1,8 @@
 package be.vdab.prularia.repositories;
 
-import be.vdab.prularia.domain.Bestelling;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -54,4 +54,15 @@ public class MagazijnPlaatsRepository {
                         result.getLong("magazijnplaatsId")),
                 magazijnplaatsIdEnAantal.keySet().toArray());
     }
+
+    public int verlaagAantalArtikelInMagazijn(long magazijnPlaatsId, int aantalVerkocht){
+        //var magazijnPlaatsId = vindMagazijnPlaatsenByArtikelId(artikelId);
+        var sql = """
+                  update magazijnPlaatsen
+                  set aantal = aantal - ?
+                  where magazijnPlaatsId = ?
+                  """;
+        return   template.update(sql,aantalVerkocht,magazijnPlaatsId);
+    }
+
 }

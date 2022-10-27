@@ -39,4 +39,13 @@ public class ArtikelRepository {
             return Optional.empty();
         }
     }
+    public int verlaagArtikelVoorraad(long artikelId, int aantal){
+        var sql = """
+                  update artikelen
+                  set voorraad = voorraad - ?
+                  where artikelId = ? and voorraad >= ?
+                  """;
+        return template.update(sql,aantal,artikelId,aantal);
+
+    }
 }
