@@ -14,6 +14,8 @@
 <a th:href="@{/}">
     <button>Home</button>
 </a>
+<th:block th:if="${param.nogNietAlleArtikelsOpgehaald}" th:class="fout">Kan bestelbon niet verwerken. Niet alle artikels zijn opgehaald</th:block>
+<th:block th:if="${!param.BesteldArtikelNietGevondenOpMagazijnPlaats.isEmpty()}" th:text="|Kan magazijnplaatsId van het besteld artikel niet vinden. MagazijnplaatsId: ${param.BesteldArtikelNietGevondenOpMagazijnPlaats}|" th:class="fout"></th:block>
 <table class="format">
     <caption>
         <h1 th:text="|BestelbonId : ${bestelId}|"></h1>

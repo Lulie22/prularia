@@ -1,5 +1,4 @@
-var checkboxes = document.querySelectorAll("input[type='checkbox']")
-console.log
+var checkboxes = document.querySelectorAll("input[type='checkbox']");
 var submitButt = document.getElementById("afgewerktKnop");
 
 for (const checkbox of checkboxes) {
@@ -19,7 +18,13 @@ for (const checkbox of checkboxes) {
             status: this.checked
         }
         const response = await fetch("checkbox",
-            {method: "POST", body:JSON.stringify(data), mode:"no-cors", headers: { "Content-Type": "text/plain" }})
+            {method: "POST",
+                body:JSON.stringify(data),
+                headers: {
+                "Accept":"application/json",
+                "Content-Type": "application/json"
+            }
+            });
         // via path variable (niet mogelijk gezien deze altijd wordt doorgestuurd als GET en niet als POST
         /*console.log(checkbox.dataset.magazijnplaatsid)
         console.log(checkbox.checked)

@@ -3,12 +3,13 @@ package be.vdab.prularia.controllers;
 import be.vdab.prularia.dto.MagazijnplaatsIdEnStatus;
 import be.vdab.prularia.exceptions.GeenVolgendeBestellingException;
 import be.vdab.prularia.exceptions.OnvoldoendeArtikelInHetMagazijnException;
+import be.vdab.prularia.exceptions.OverzichtBesteldArtikelNietGevondenException;
 import be.vdab.prularia.services.BestellingService;
 import be.vdab.prularia.sessions.MagazijnierSession;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("bestelling")
@@ -46,41 +47,27 @@ public class BestellingController {
                 .addObject("lijstVanBesteldeArtikels", magazijnierSession.getLijstVanBesteldeArtikels());
     }
 
-    /*@PostMapping("checkbox")
-    public void checkedBox(@RequestParam(name = "magazijnplaatsId", defaultValue = "") String stringMagazijnplaatsId,
-                           @RequestParam(name = "status", defaultValue = "") String stringStatus) {
-        System.out.println("StringmagazijnplaatsId:" + stringMagazijnplaatsId);
-        System.out.println("Stringstatus:" + stringStatus);
-    }*/
-    // Path variables zijn niet mogelijk voor PostMapping
-    /*@PostMapping("checkbox/{magazijnplaatsId}/{status}")
-    public void checkbox(@PathVariable long magazijnplaatsId, @PathVariable boolean status) {
-        System.out.println("magazijnplaatsId:" + magazijnplaatsId);
-        System.out.println("status:" + status);
-    }*/
-    // request parameters bij body zetten
-    /*@PostMapping("checkbox")
-    @ResponseBody
-    public String checkbox(@RequestParam int magazijnplaatsid, @RequestParam String status) {
-        System.out.println("StringmagazijnplaatsId:" + magazijnplaatsid);
-        System.out.println("Stringstatus:" + status);
-        return "magazijnplaatsId: " + magazijnplaatsid;
-    }*/
-
-    // gebruik van een form voor elke checkbox in combinatie met Path Variables
-    @PostMapping(value = "checkbox", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String checkbox(@RequestBody MagazijnplaatsIdEnStatus magazijnplaatsIdEnStatus) {
-        System.out.println(magazijnplaatsIdEnStatus);
-        return "";
+    @PostMapping("checkbox")
+    public String checkbox(@RequestBody MagazijnplaatsIdEnStatus magazijnplaatsIdEnStatus, RedirectAttributes redirect) {
+        // Nu nog session aanpassen
+        if (!magazijnierSession.setStatusBesteldArtikel(magazijnplaatsIdEnStatus.magazijnplaatsId(), magazijnplaatsIdEnStatus.status())) {
+            redirect.addAttribute("BesteldArtikelNietGevondenOpMagazijnPlaats", magazijnplaatsIdEnStatus.magazijnplaatsId());
+        }
+        return "redirect:/";
     }
 
     @PostMapping("afgewerktebestelling")
-    public ModelAndView afgewerkteBestelling(){
+    public String afgewerkteBestelling(RedirectAttributes redirect){
+        if (!magazijnierSession.besteldeArtikelsZijnOpgehaald()) {
+            redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
+            return "redirect:/";
+        }
         var model = new ModelAndView("index");
         // service aanspreken, etc
         // volgende user story
 
         // bestelling succesvol afgewerkt
-        return model.addObject("bestellingIsAfgewerkt", true);
+        redirect.addAttribute("bestellingIsAfgewerkt", true);
+        return "redirect:/";
     }
 }

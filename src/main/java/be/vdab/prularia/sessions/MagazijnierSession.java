@@ -1,6 +1,7 @@
 package be.vdab.prularia.sessions;
 
 import be.vdab.prularia.dto.OverzichtBesteldArtikel;
+import be.vdab.prularia.exceptions.OverzichtBesteldArtikelNietGevondenException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -26,5 +27,21 @@ public class MagazijnierSession {
 
     public void setLijstVanBesteldeArtikels(List<OverzichtBesteldArtikel> lijstVanBesteldeArtikels) {
         this.lijstVanBesteldeArtikels = lijstVanBesteldeArtikels;
+    }
+
+    public boolean setStatusBesteldArtikel(long magazijnplaatsId, boolean status) {
+        boolean aangepast = false;
+        for (var bestellijn : lijstVanBesteldeArtikels) {
+            if (bestellijn.magazijnplaatsId() == magazijnplaatsId) {
+                aangepast = true;
+                break;
+            }
+        }
+        return aangepast;
+    }
+
+    public boolean besteldeArtikelsZijnOpgehaald() {
+        return lijstVanBesteldeArtikels.stream()
+                .allMatch(OverzichtBesteldArtikel::aangevinkt);
     }
 }
