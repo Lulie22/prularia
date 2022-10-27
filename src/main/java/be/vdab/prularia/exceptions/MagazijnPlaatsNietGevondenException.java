@@ -1,10 +1,10 @@
 package be.vdab.prularia.exceptions;
 
-public class MagazijnPlaatNietGevondenException extends RuntimeException{
+public class MagazijnPlaatsNietGevondenException extends RuntimeException{
     private static final long serialVersionUID = 1L;
     private final long magazijnPlaatsId;
 
-    public MagazijnPlaatNietGevondenException(long magazijnPlaatsId) {
+    public MagazijnPlaatsNietGevondenException(long magazijnPlaatsId) {
         this.magazijnPlaatsId = magazijnPlaatsId;
     }
 

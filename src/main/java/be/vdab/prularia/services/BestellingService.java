@@ -1,6 +1,5 @@
 package be.vdab.prularia.services;
 
-import be.vdab.prularia.domain.Artikel;
 import be.vdab.prularia.domain.Bestellijn;
 import be.vdab.prularia.domain.MagazijnPlaats;
 import be.vdab.prularia.domain.UitgaandeLevering;
@@ -108,7 +107,7 @@ public class BestellingService {
         var bestelId = magazijnierSession.getBestelId();
         var besteldArtikelLijst = magazijnierSession.getLijstVanBesteldeArtikels();
 
-        var besteling = bestellingRepository.vindBestellingById(bestelId).orElseThrow(() ->
+        var bestelling = bestellingRepository.vindBestellingById(bestelId).orElseThrow(() ->
                 {
                     throw new GeenVolgendeBestellingException();
                 }
@@ -121,7 +120,7 @@ public class BestellingService {
             var aantalAangepasteMagazijnPlaatRecord = magazijnPlaatsRepository.verlaagAantalArtikelInMagazijn(bestellijn.magazijnPlaatsId(), bestellijn.aantal());
             if (aantalAangepasteMagazijnPlaatRecord == 0) {
                 if (magazijnPlaatsRepository.vindMagazijnPlaatsenByArtikelId(bestellijn.artikelId()).isEmpty()) {
-                    throw new MagazijnPlaatNietGevondenException(bestellijn.magazijnPlaatsId());
+                    throw new MagazijnPlaatsNietGevondenException(bestellijn.magazijnPlaatsId());
                 }
 //                else {
 //                    throw new OnvoldoendeArtikelInHetMagazijnException(
@@ -148,7 +147,7 @@ public class BestellingService {
 
         return uitgaandeLeveringRepository.create(new UitgaandeLevering(
                 0, bestelId, LocalDate.now(), LocalDate.now().plusDays(1), "",
-                besteling.getKlantId(), uitgaandeLeveringStatusId));
+                bestelling.getKlantId(), uitgaandeLeveringStatusId));
 
     }
 }

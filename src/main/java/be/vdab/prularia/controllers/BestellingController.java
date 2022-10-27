@@ -72,7 +72,7 @@ public class BestellingController {
             redirect.addAttribute("onvoldoendeArtikelenBestellijnId", ex.getBestellijnId());
             redirect.addAttribute("onvoldoendeArtikelenArtikelId", ex.getArtikelId());
             return new ModelAndView("redirect:/");
-        } catch (MagazijnPlaatNietGevondenException ex) {
+        } catch (MagazijnPlaatsNietGevondenException ex) {
             redirect.addAttribute("magazijnPlaatsnietGevonden", true);
             return new ModelAndView("redirect:/");
         }

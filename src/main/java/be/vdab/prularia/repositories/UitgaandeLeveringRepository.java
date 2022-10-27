@@ -29,7 +29,7 @@ public class UitgaandeLeveringRepository {
                 Map.of("bestelId", uitgaandeLevering.getBestelId(),
                         "vertrekDatum", uitgaandeLevering.getVertrekDatum(),
                         "aankomstDatum", uitgaandeLevering.getAankomstDatum(),
-                            "trackingcode", uitgaandeLevering.getTrackingCode(),
+                            //"trackingcode", uitgaandeLevering.getTrackingCode(),
                             "klantId", uitgaandeLevering.getKlantId(),
                        "uitgaandeLeveringsStatusId", uitgaandeLevering.getUitgaandeLeveringsStatusId())
         ).longValue();
