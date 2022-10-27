@@ -117,10 +117,10 @@ public class BestellingService {
             throw new UitgaandaLeveringsStatusIdNietGevondenException();
         });
         besteldArtikelLijst.stream().forEach(bestellijn -> {
-            var aantalAangepasteMagazijnPlaatRecord = magazijnPlaatsRepository.verlaagAantalArtikelInMagazijn(bestellijn.magazijnPlaatsId(), bestellijn.aantal());
+            var aantalAangepasteMagazijnPlaatRecord = magazijnPlaatsRepository.verlaagAantalArtikelInMagazijn(bestellijn.getMagazijnplaatsId(), bestellijn.getAantal());
             if (aantalAangepasteMagazijnPlaatRecord == 0) {
-                if (magazijnPlaatsRepository.vindMagazijnPlaatsenByArtikelId(bestellijn.artikelId()).isEmpty()) {
-                    throw new MagazijnPlaatsNietGevondenException(bestellijn.magazijnPlaatsId());
+                if (magazijnPlaatsRepository.vindMagazijnPlaatsenByArtikelId(bestellijn.getArtikelId()).isEmpty()) {
+                    throw new MagazijnPlaatsNietGevondenException(bestellijn.getMagazijnplaatsId());
                 }
 //                else {
 //                    throw new OnvoldoendeArtikelInHetMagazijnException(
@@ -130,16 +130,16 @@ public class BestellingService {
 //                    );
 //                }
             }
-            var aantalAangepasteArtikelRecord = artikelRepository.verlaagArtikelVoorraad(bestellijn.artikelId(), bestellijn.aantal());
+            var aantalAangepasteArtikelRecord = artikelRepository.verlaagArtikelVoorraad(bestellijn.getArtikelId(), bestellijn.getAantal());
             if (aantalAangepasteArtikelRecord == 0) {
 
-                if (artikelRepository.vindById(bestellijn.artikelId()).isEmpty()) {
-                    throw new ArtikelNietGevondenException(bestellijn.artikelId());
+                if (artikelRepository.vindById(bestellijn.getArtikelId()).isEmpty()) {
+                    throw new ArtikelNietGevondenException(bestellijn.getArtikelId());
                 } else {
                     throw new OnvoldoendeArtikelVoorraadException(
                             bestelId,
-                            bestellijnRepository.vindBestellijnByArtikelId(bestellijn.artikelId()).getBestellijnId(),
-                            bestellijn.artikelId()
+                            bestellijnRepository.vindBestellijnByArtikelId(bestellijn.getArtikelId()).getBestellijnId(),
+                            bestellijn.getArtikelId()
                     );
                 }
             }

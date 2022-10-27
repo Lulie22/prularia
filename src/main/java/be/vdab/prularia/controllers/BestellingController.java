@@ -63,8 +63,8 @@ public class BestellingController {
         return "redirect:/";
     }
 
-    @PostMapping("afgewerktebestelling")
-    public String afgewerkteBestelling(RedirectAttributes redirect){
+    /*@PostMapping("afgewerktebestellingen")
+    public String afgewerkteBestellingen(RedirectAttributes redirect){
         if (!magazijnierSession.besteldeArtikelsZijnOpgehaald()) {
             redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
             return "redirect:/";
@@ -76,11 +76,15 @@ public class BestellingController {
         // bestelling succesvol afgewerkt
         redirect.addAttribute("bestellingIsAfgewerkt", true);
         return "redirect:/";
-    }
+    }*/
 
     @PostMapping("afgewerktebestelling")
 
     public ModelAndView afgewerktebestelling(RedirectAttributes redirect) {
+        if (!magazijnierSession.besteldeArtikelsZijnOpgehaald()) {
+            redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
+            return new ModelAndView("bestelbon");
+        }
         // check();
 
         try {
