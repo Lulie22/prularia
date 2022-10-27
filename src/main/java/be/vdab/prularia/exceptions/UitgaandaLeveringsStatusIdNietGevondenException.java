@@ -1,5 +1,5 @@
 package be.vdab.prularia.exceptions;
 
-public class UitgaandaLeveringsStatusNietGevondenException extends RuntimeException{
+public class UitgaandaLeveringsStatusIdNietGevondenException extends RuntimeException{
     private static final long serialVersionUID = 1L;
 }
