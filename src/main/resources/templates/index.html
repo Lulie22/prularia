@@ -9,6 +9,7 @@
   <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
 <h1>Welkom in het Magazijn</h1>
+<th:block th:if="${geenVolgendeBestelling}" th:class="boodschap">Er is geen volgende bestelling.</th:block>
 <th:block th:if="${bestellingIsAfgewerkt}" th:class="boodschap">De bestelling is succesvol afgewerkt.</th:block>
 <a th:href="@{/bestelling/nieuw}"><button>Nieuw</button></a>
 </body>
