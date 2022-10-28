@@ -14,8 +14,8 @@
 <a th:href="@{/}">
     <button>Home</button>
 </a>
-<th:block th:if="${param.nogNietAlleArtikelsOpgehaald}" th:class="fout">Kan bestelbon niet verwerken. Niet alle artikels zijn opgehaald</th:block>
-<th:block th:if="${param.BesteldArtikelNietGevondenOpMagazijnPlaats}" th:text="|Kan magazijnplaatsId van het besteld artikel niet vinden. MagazijnplaatsId: ${param.BesteldArtikelNietGevondenOpMagazijnPlaats}|" th:class="fout"></th:block>
+<div th:if="${param.nogNietAlleArtikelsOpgehaald}" th:class="fout">Kan bestelbon niet verwerken. Niet alle artikels zijn opgehaald</div>
+<div th:if="${param.BesteldArtikelNietGevondenOpMagazijnPlaats}" th:class="fout">Kan magazijnplaatsId van het besteld artikel niet vinden. MagazijnplaatsId: <th:block>${param.BesteldArtikelNietGevondenOpMagazijnPlaats}</th:block> </div>
 <table class="format">
     <caption>
         <h1 th:text="|BestelbonId : ${bestelId}|"></h1>
@@ -40,7 +40,7 @@
     </tbody>
 </table>
 <form method="post" th:action="@{/bestelling/afgewerktebestelling}">
-    <button type="submit" id="afgewerktKnop" disabled>Afwerken</button>
+    <button type="submit" id="afgewerktKnop">Afwerken</button>
 </form>
 
 </body>

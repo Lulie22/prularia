@@ -45,11 +45,11 @@ h1 {
 }
 
 tr:nth-child(even) {
-    background-color: #FAFABA;
+    background-color: lightgrey;
 }
 
 tr:nth-child(odd) {
-    background-color: #FAFAFA;
+    background-color: #FAFAFA;;
 }
 
 .format {
@@ -97,7 +97,7 @@ caption h1 {
 }
 
 .fout {
-    background-color: red;
+    background-color: lightcoral;
     color: white;
     font-weight: bold;
     padding-left: 0.5em;
@@ -105,7 +105,7 @@ caption h1 {
 }
 
 .boodschap {
-    background-color: #4CAF50;
+    background-color: #ABD7A8;
     color: white;
     font-weight: bold;
     padding: 0.5em;

@@ -1,16 +1,16 @@
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" http-equiv="refresh" content="30">
   <title>Home</title>
-  <Link rel="stylesheet" th:href="@{/css/prularia.css}">
+  <link rel="stylesheet" th:href="@{/css/prularia.css}">
 </head>
 <body>
 <div>
   <img th:src="@{/images/logo_prularia_zwart.png}" alt="prularia_logo">
 </div>
 <h1>Welkom in het Magazijn</h1>
-<th:block th:if="${geenVolgendeBestelling}" th:class="boodschap">Geen volgende bestelling beschikbaar.</th:block>
-<th:block th:if="${bestellingIsAfgewerkt}" th:class="boodschap">De bestelling is succesvol afgewerkt.</th:block>
-<a th:href="@{/bestelling/nieuw}"><button>Nieuw</button></a>
+<div th:if="${geenVolgendeBestelling}" th:class="fout">Geen volgende bestelling beschikbaar.</div>
+<div th:if="${param.uitgaandeLeveringsId}" th:class="boodschap" th:text="|De bestelling is succesvol met uitgaande leverings id: ${param.uitgaandeLeveringsId}.|"></div>
+<a th:href="@{/bestelling/nieuw}"><button>Nieuwe bestelling</button></a>
+
 </body>
 </html>

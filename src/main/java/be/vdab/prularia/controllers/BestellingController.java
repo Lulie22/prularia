@@ -64,7 +64,6 @@ public class BestellingController {
     }
 
     @PostMapping("afgewerktebestelling")
-
     public ModelAndView afgewerktebestelling(RedirectAttributes redirect) {
         if (!magazijnierSession.besteldeArtikelsZijnOpgehaald()) {
             redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
