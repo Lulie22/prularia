@@ -51,7 +51,6 @@ public class BestellingService {
 
     public void vindVolgendeBestelling() {
         Optional<Long> optionalBestelId = bestellingRepository.vindIdVolgendeBestelling();
-        System.out.println(optionalBestelId.isPresent());
         if (optionalBestelId.isEmpty()) {
             throw new GeenVolgendeBestellingException();
         } else {

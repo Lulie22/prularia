@@ -45,9 +45,4 @@ public class MagazijnierSession {
         return lijstVanBesteldeArtikels.stream()
                 .allMatch(OverzichtBesteldArtikel::isAangevinkt);
     }
-
-    public void resetBestelling() {
-        this.bestelId = 0;
-        this.lijstVanBesteldeArtikels = null;
-    }
 }

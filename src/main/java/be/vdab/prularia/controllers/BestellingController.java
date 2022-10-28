@@ -38,7 +38,7 @@ public class BestellingController {
             try {
                 bestellingService.vindVolgendeBestelling();
             } catch (GeenVolgendeBestellingException ex) {
-                return new ModelAndView("index")
+                return new ModelAndView("bestelbon")
                         .addObject("geenVolgendeBestelling", true);
             } catch (OnvoldoendeArtikelInHetMagazijnException ex) {
                 return new ModelAndView("bestelbon")
@@ -63,6 +63,21 @@ public class BestellingController {
         return "redirect:/";
     }
 
+    /*@PostMapping("afgewerktebestellingen")
+    public String afgewerkteBestellingen(RedirectAttributes redirect){
+        if (!magazijnierSession.besteldeArtikelsZijnOpgehaald()) {
+            redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
+            return "redirect:/";
+        }
+        var model = new ModelAndView("index");
+        // service aanspreken, etc
+        // volgende user story
+
+        // bestelling succesvol afgewerkt
+        redirect.addAttribute("bestellingIsAfgewerkt", true);
+        return "redirect:/";
+    }*/
+
     @PostMapping("afgewerktebestelling")
 
     public ModelAndView afgewerktebestelling(RedirectAttributes redirect) {
@@ -70,11 +85,10 @@ public class BestellingController {
             redirect.addAttribute("nogNietAlleArtikelsOpgehaald", true);
             return new ModelAndView("bestelbon");
         }
+        // check();
+
         try {
             var uitgaandeLeveringsId = bestellingService.afgewerkteBestelling();
-            magazijnierSession.resetBestelling();
-            System.out.println(magazijnierSession.getBestelId());
-            System.out.println(magazijnierSession.getLijstVanBesteldeArtikels());
             redirect.addAttribute("uitgaandeLeveringsId", uitgaandeLeveringsId);
             return new ModelAndView("redirect:/");
         } catch (OnvoldoendeArtikelInHetMagazijnException ex) {
@@ -95,5 +109,6 @@ public class BestellingController {
             redirect.addAttribute("magazijnPlaatsnietGevonden", true);
             return new ModelAndView("redirect:/");
         }
+
     }
 }
