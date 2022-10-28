@@ -38,7 +38,7 @@ public class BestellingController {
             try {
                 bestellingService.vindVolgendeBestelling();
             } catch (GeenVolgendeBestellingException ex) {
-                return new ModelAndView("bestelbon")
+                return new ModelAndView("index")
                         .addObject("geenVolgendeBestelling", true);
             } catch (OnvoldoendeArtikelInHetMagazijnException ex) {
                 return new ModelAndView("bestelbon")
